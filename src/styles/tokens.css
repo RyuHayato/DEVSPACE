@@ -1,0 +1,189 @@
+/* ==========================================================================
+   DevWorkspace — design tokens
+   ==========================================================================
+
+   Typography
+   ----------
+   "Gothic" is the historical name for the grotesque sans — News Gothic,
+   Franklin Gothic — and that is the lineage this interface draws on, rather
+   than anything blackletter.
+
+   · Archivo          display, titles, figures. An American grotesque with
+                      slightly condensed proportions, tight apertures and
+                      sturdy stems. Takes heavy negative tracking at large
+                      sizes without collapsing, which is what gives the
+                      headings their severity. Tabular figures for statistics.
+   · Instrument Sans  everything in the UI. Humanist/grotesk balance, large
+                      x-height, clean sharp terminals, strong lowercase. Stays
+                      legible at the 11–13px where most of this app lives.
+   · JetBrains Mono   code and terminal output. Built for long reading, with
+                      unambiguous 0/O and 1/l/I.
+
+   All three are SIL Open Font Licensed and bundled locally, so the app needs
+   no network at runtime.
+
+   Colour
+   ------
+   Cool charcoal neutrals, warm bone text, one ember accent. Accents are kept
+   as raw channel triplets so alpha variants compose without `color-mix`.
+   ========================================================================== */
+
+:root {
+  /* --- families ------------------------------------------------------- */
+  --font-display: 'Archivo Variable', 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-ui: 'Instrument Sans Variable', 'Instrument Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  /* --- type scale ----------------------------------------------------- */
+  --size-display: 2.375rem;
+  --size-title: 1.6875rem;
+  --size-heading: 1.0625rem;
+  --size-body: 0.875rem;
+  --size-ui: 0.8125rem;
+  --size-meta: 0.75rem;
+  --size-eyebrow: 0.6875rem;
+  --size-stat: 1.5rem;
+
+  --track-display: -0.032em;
+  --track-title: -0.026em;
+  --track-heading: -0.014em;
+  --track-eyebrow: 0.16em;
+
+  /* --- spacing -------------------------------------------------------- */
+  --s-1: 2px;
+  --s-2: 4px;
+  --s-3: 6px;
+  --s-4: 8px;
+  --s-5: 12px;
+  --s-6: 16px;
+  --s-7: 20px;
+  --s-8: 24px;
+  --s-9: 32px;
+  --s-10: 40px;
+  --s-11: 56px;
+
+  /* --- geometry ------------------------------------------------------- */
+  --r-xs: 2px;
+  --r-sm: 3px;
+  --r-md: 4px;
+  --r-lg: 6px;
+
+  --sidebar-w: 268px;
+  --topbar-h: 50px;
+  --row-h: 34px;
+  --control-h: 30px;
+  --pane-pad: var(--s-8);
+
+  /* --- motion --------------------------------------------------------- */
+  --dur-fast: 90ms;
+  --dur: 150ms;
+  --dur-slow: 220ms;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* --- semantic colour ------------------------------------------------ */
+  --success-rgb: 127 168 106;
+  --warning-rgb: 212 181 68;
+  --danger-rgb: 210 87 76;
+
+  --success: rgb(var(--success-rgb));
+  --warning: rgb(var(--warning-rgb));
+  --danger: rgb(var(--danger-rgb));
+
+  --z-overlay: 100;
+  --z-toast: 200;
+}
+
+/* --- accents ---------------------------------------------------------- */
+
+[data-accent='ember'] {
+  --accent-rgb: 228 145 63;
+  --accent-bright-rgb: 241 167 90;
+}
+[data-accent='sage'] {
+  --accent-rgb: 143 174 114;
+  --accent-bright-rgb: 165 193 138;
+}
+[data-accent='steel'] {
+  --accent-rgb: 121 163 196;
+  --accent-bright-rgb: 146 185 215;
+}
+
+:root {
+  --accent: rgb(var(--accent-rgb));
+  --accent-bright: rgb(var(--accent-bright-rgb));
+  --accent-soft: rgb(var(--accent-rgb) / 0.12);
+  --accent-softer: rgb(var(--accent-rgb) / 0.07);
+  --accent-line: rgb(var(--accent-rgb) / 0.36);
+}
+
+/* --- themes ----------------------------------------------------------- */
+
+[data-theme='midnight'] {
+  --bg-canvas: #0b0c0e;
+  --bg-base: #0f1013;
+  --bg-surface: #14161a;
+  --bg-raised: #1a1c21;
+  --bg-overlay: #1e2127;
+  --bg-sunken: #0a0b0d;
+
+  --line-faint: #1b1e23;
+  --line: #24272e;
+  --line-strong: #32363f;
+
+  --text-primary: #f0efec;
+  --text-secondary: #a8aab2;
+  --text-muted: #74777f;
+  --text-faint: #4e5158;
+
+  --shadow-overlay: 0 32px 72px -16px rgb(0 0 0 / 0.78), 0 2px 8px rgb(0 0 0 / 0.4);
+  --texture-opacity: 0.022;
+}
+
+[data-theme='graphite'] {
+  --bg-canvas: #121113;
+  --bg-base: #17161a;
+  --bg-surface: #1d1c21;
+  --bg-raised: #242328;
+  --bg-overlay: #2a292f;
+  --bg-sunken: #100f12;
+
+  --line-faint: #232227;
+  --line: #2e2d34;
+  --line-strong: #3d3c45;
+
+  --text-primary: #f3f1ed;
+  --text-secondary: #afaba6;
+  --text-muted: #7d7973;
+  --text-faint: #56524c;
+
+  --shadow-overlay: 0 32px 72px -16px rgb(0 0 0 / 0.7), 0 2px 8px rgb(0 0 0 / 0.36);
+  --texture-opacity: 0.03;
+}
+
+/* --- density ---------------------------------------------------------- */
+
+[data-density='compact'] {
+  --size-display: 2rem;
+  --size-title: 1.5rem;
+  --row-h: 28px;
+  --control-h: 26px;
+  --pane-pad: var(--s-6);
+  --sidebar-w: 240px;
+}
+
+/* --- reduced motion --------------------------------------------------- */
+
+[data-motion='reduced'] {
+  --dur-fast: 1ms;
+  --dur: 1ms;
+  --dur-slow: 1ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion='system'] {
+    --dur-fast: 1ms;
+    --dur: 1ms;
+    --dur-slow: 1ms;
+  }
+}

@@ -1,0 +1,259 @@
+/* ==========================================================================
+   Base — reset, typography roles, focus, scrollbars
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: var(--size-body);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background: var(--bg-canvas);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+  /* A desktop app, not a document: text selection is opt-in. */
+  user-select: none;
+  cursor: default;
+}
+
+/* A faint film of noise keeps the large dark fields from looking flat.
+   Static, non-interactive, and costs one composited layer. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: var(--texture-opacity);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--line);
+}
+
+::selection {
+  background: rgb(var(--accent-rgb) / 0.28);
+  color: var(--text-primary);
+}
+
+/* --- focus ------------------------------------------------------------
+   Visible, never suppressed. Pointer interaction does not draw a ring;
+   keyboard interaction always does. */
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--r-xs);
+}
+
+/* --- scrollbars ------------------------------------------------------- */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-faint);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ==========================================================================
+   Typographic roles
+   ========================================================================== */
+
+.t-display {
+  font-family: var(--font-display);
+  font-size: var(--size-display);
+  font-weight: 620;
+  line-height: 1.02;
+  letter-spacing: var(--track-display);
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.t-title {
+  font-family: var(--font-display);
+  font-size: var(--size-title);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: var(--track-title);
+  color: var(--text-primary);
+}
+
+.t-heading {
+  font-family: var(--font-display);
+  font-size: var(--size-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: var(--track-heading);
+  color: var(--text-primary);
+}
+
+/* The small uppercase label that structures every panel. */
+.t-eyebrow {
+  font-family: var(--font-ui);
+  font-size: var(--size-eyebrow);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.t-body {
+  font-size: var(--size-body);
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.t-ui {
+  font-size: var(--size-ui);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text-primary);
+}
+
+.t-meta {
+  font-size: var(--size-meta);
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: var(--size-ui);
+  line-height: 1.5;
+  font-variant-ligatures: none;
+}
+
+/* Figures that should align in a column and read at a glance. */
+.t-stat {
+  font-family: var(--font-display);
+  font-size: var(--size-stat);
+  font-weight: 620;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.t-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* --- shared text helpers ---------------------------------------------- */
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.selectable {
+  user-select: text;
+  cursor: text;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.secondary {
+  color: var(--text-secondary);
+}
+
+/* Visually hidden but available to assistive technology. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

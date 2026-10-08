@@ -1,0 +1,12 @@
+# Normalise line endings. The repository stores LF and every checkout keeps
+# LF, so Prettier's `endOfLine: "lf"` default — and therefore the
+# `format:check` step of `npm run verify` — agrees with what Git produces on
+# Windows as well as on Unix.
+* text=auto eol=lf
+
+# Binary assets must never be line-ending converted.
+*.png binary
+*.ico binary
+*.icns binary
+*.woff binary
+*.woff2 binary

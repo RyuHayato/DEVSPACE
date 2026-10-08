@@ -1,0 +1,32 @@
+[package]
+name = "devworkspace"
+version = "1.0.0"
+description = "Your projects. One command center."
+authors = ["DevWorkspace"]
+edition = "2021"
+rust-version = "1.77"
+
+[lib]
+name = "devworkspace_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+uuid = { version = "1", features = ["v4", "serde"] }
+
+[dev-dependencies]
+tempfile = "3"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true
